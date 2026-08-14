@@ -1,0 +1,234 @@
+-- local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
+
+-- local asteroid_functions = {}
+
+-- -- ASTRALITE RATIOS
+
+
+-- asteroid_functions.nauvis_ratio = {
+--     3, 2, 1, 0.25
+-- }
+
+-- asteroid_functions.vulcanus_ratio = {
+--     5, 2, 1, 0.35
+-- }
+
+-- asteroid_functions.gleba_ratio = {
+--     3, 5, 1, 0.35
+-- }
+
+-- asteroid_functions.fulgora_ratio = {
+--     4, 3, 1, 0.5
+-- }
+
+-- asteroid_functions.aquilo_ratio = {
+--     1, 2, 20, 1
+-- }
+
+-- asteroid_functions.system_edge_ratio = {
+--     3, 5, 2, 2
+-- }
+
+
+-- -- ASTRALITE SIZE DISTRIBUTION
+
+-- asteroid_functions.nauvis_to_aquilo = {
+--     probability_on_range_chunk = {
+--         {
+--             position = 0.1,
+--             probability = 0.0125,
+--             angle_when_stopped = 1
+--         },
+--         {
+--             position = 0.9,
+--             probability = 0.001,
+--             angle_when_stopped = 1
+--         }
+--     },
+
+--     probability_on_range_small = {
+--         {
+--             position = 0.1,
+--             probability = 0.01,
+--             angle_when_stopped = 0.7
+--         },
+--         {
+--             position = 0.9,
+--             probability = 0.01,
+--             angle_when_stopped = 0.7
+--         }
+--     },
+
+--     probability_on_range_medium = {
+--         {
+--             position = 0.1,
+--             probability = 0,
+--             angle_when_stopped = 0.6
+--         },
+--         {
+--             position = 0.5,
+--             probability = 0.005,
+--             angle_when_stopped = 0.6
+--         },
+--         {
+--             position = 0.9,
+--             probability = 0.01,
+--             angle_when_stopped = 0.6
+--         }
+--     },
+
+--     probability_on_range_big = {
+--         {
+--             position = 0.1,
+--             probability = 0,
+--             angle_when_stopped = 0.5
+--         },
+--         {
+--             position = 0.7,
+--             probability = 0.0025,
+--             angle_when_stopped = 0.5
+--         },
+--         {
+--             position = 0.9,
+--             probability = 0.005,
+--             angle_when_stopped = 0.5
+--         }
+--     },
+
+--     probability_on_range_huge = {
+--         {
+--             position = 0.1,
+--             probability = 0,
+--             angle_when_stopped = 0.4
+--         },
+--         {
+--             position = 0.9,
+--             probability = 0.0025,
+--             angle_when_stopped = 0.4
+--         }
+--     },
+
+--     type_ratios = {
+--         {
+--             position = 0.1,
+--             ratios = asteroid_functions.nauvis_ratio
+--         },
+--         {
+--             position = 0.9,
+--             ratios = asteroid_functions.aquilo_ratio
+--         }
+--     }
+-- }
+
+-- return asteroid_functions
+
+
+-- set default to 1 higher values are for testing
+local astralite_probability_multiplier = 100
+
+
+local astralite = {}
+
+local asteroid_sizes = {
+    {
+        asteroid = "astralite-asteroid-chunk",
+        type = "asteroid-chunk",
+
+        probability = {
+            {position = 0.1, probability = 0.006},
+            {position = 0.9, probability = 0.002},
+        }
+    },
+    {
+        asteroid = "small-astralite-asteroid",
+
+        probability = {
+            {position = 0.1, probability = 0.003},
+            {position = 0.5, probability = 0.004},
+            {position = 0.9, probability = 0.002},
+        }
+    },
+    {
+        asteroid = "medium-astralite-asteroid",
+
+        probability = {
+            {position = 0.1, probability = 0.0002},
+            {position = 0.5, probability = 0.002},
+            {position = 0.9, probability = 0.002},
+        }
+    },
+    {
+        asteroid = "big-astralite-asteroid",
+
+        probability = {
+            {position = 0.1, probability = 0},
+            {position = 0.5, probability = 0.0005},
+            {position = 0.9, probability = 0.00015},
+        }
+    },
+    {
+        asteroid = "huge-astralite-asteroid",
+
+        probability = {
+            {position = 0.1, probability = 0},
+            {position = 0.5, probability = 0},
+            {position = 0.9, probability = 0.0005},
+        }
+    },
+}
+
+local function interpolate(points, position)
+    if position <= points[1].position then
+        return points[1].probability
+    end
+
+    for i = 1, #points -1 do
+        local a = points[i]
+        local b = points[i + 1]
+
+        if position <= b.position then
+            local t = 
+                (position - a.position) /
+                (b.position - a.position)
+
+            return a.probability + (b.probability - a.probability) * t
+        end
+    end
+    return points[#points].probability
+end
+
+function astralite.spawn_definitions()
+    local definitions = {}
+
+    for _, size in ipairs(asteroid_sizes) do
+        local spawn_points = {}
+
+        for _, point in ipairs(size.probability) do
+            table.insert(
+                spawn_points,
+                {
+                    distance = point.position,
+                    probability = interpolate(
+                        size.probability,
+                        point.position
+                    ) * astralite_probability_multiplier,
+                    speed = 0.0169
+                }
+            )
+        end
+
+        local definition = {
+            asteroid = size.asteroid,
+            spawn_points = spawn_points
+        }
+
+        if size.type then
+            definition.type = size.type
+        end
+
+        table.insert(definitions, definition)
+    end
+    return definitions
+end
+
+return astralite

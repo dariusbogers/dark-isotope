@@ -1,0 +1,162 @@
+local asteroid_sizes = {
+    "chunk",
+    "small",
+    "medium",
+    "big",
+    "huge"
+}
+
+local size_resolution = {
+    chunk = 50,
+    small = 128,
+    medium = 230,
+    big = 304,
+    huge = 512
+}
+
+local size_scale = {
+    chunk = 0.5,
+    small = 0.5,
+    medium = 0.5,
+    big = 0.6,
+    huge = 0.75
+}
+
+local function astralite_variation(size, number)
+    local resolution = size_resolution[size]
+    local scale = size_scale[size]
+
+    return {
+        color_texture = {
+            filename = "__dark-isotope__/graphics/entity/asteroid/astralite/"
+                .. size .. "/asteroid-astralite-" .. size
+                .. "-colour-" .. number .. ".png",
+                size = resolution,
+                scale = scale
+        },
+
+        shadow_shift = {
+            0.25 * ({
+                chunk = 1,
+                small = 2,
+                medium = 3,
+                big = 4,
+                huge = 5
+            })[size],
+
+            0.25 * ({
+                chunk = 1,
+                small = 2,
+                medium = 3,
+                big = 4,
+                huge = 5
+            })[size],
+        },
+        
+        normal_map = {
+            filename = "__dark-isotope__/graphics/entity/asteroid/astralite/"
+                .. size .. "/asteroid-astralite-" .. size
+                .. "-normal-" .. number .. ".png",
+                size = resolution,
+                scale = scale
+        },
+        
+        roughness_map = {
+            filename = "__dark-isotope__/graphics/entity/asteroid/astralite/"
+                .. size .. "/asteroid-astralite-" .. size
+                .. "-roughness-" .. number .. ".png",
+                premul_alpha = false,
+                size = resolution,
+                scale = scale
+        }
+    }
+end
+
+local function create_variation(size)
+    local variations = {}
+
+    for i = 1, 3 do
+        local number = string.format("%02d", i)
+        table.insert(variations, astralite_variation(size, number))
+    end
+
+    return variations
+end
+
+local function create_graphics_set(base_graphics_set, size)
+    local graphics_set = table.deepcopy(base_graphics_set)
+
+    graphics_set.variations = create_variation(size)
+
+    return graphics_set
+end
+
+-- Astralite asteroid chunk
+
+local chunk = table.deepcopy(
+    data.raw["asteroid-chunk"]["metallic-asteroid-chunk"]
+)
+
+chunk.name = "astralite-asteroid-chunk"
+
+chunk.icon = 
+    "__dark-isotope__/graphics/icons/astralite-asteroid-chunk.png"
+
+chunk.graphics_set =
+    create_graphics_set(
+        data.raw["asteroid-chunk"]["metallic-asteroid-chunk"].graphics_set,
+        "chunk"
+    )
+
+chunk.minable.result= "astralite-asteroid-chunk"
+
+data:extend({chunk})
+
+-- Astalite asteroid sizes
+
+for _, size in ipairs({"small", "medium", "big", "huge"}) do
+    local vanilla_name = size .. "-metallic-asteroid"
+
+    local asteroid = table.deepcopy(
+        data.raw["asteroid"][vanilla_name]
+    )
+
+    asteroid.name = size .. "-astralite-asteroid"
+
+    asteroid.icon =
+        "__dark-isotope__/graphics/icons/"
+        .. size .. "-astralite-asteroid.png"
+
+    asteroid.graphics_set =
+        create_graphics_set(
+            data.raw["asteroid"][vanilla_name].graphics_set,
+            size
+        )
+
+    -- when destroyed create smaller astralite asteroids instead of metallic ones
+
+    local effects = asteroid.dying_trigger_effect
+
+    for _, effect in ipairs(effects) do
+        
+        if effect.type == "create-asteroid-chunk" then
+            effect.asteroid_name = "astralite-asteroid-chunk"
+        
+        elseif effect.type == "create-entity" then
+            if size == "small" then 
+                effect.entity_name =
+                    "astralite-asteroid-chunk"
+            elseif size == "medium" then 
+                effect.entity_name =
+                    "small-astralite-asteroid"
+            elseif size == "big" then 
+                effect.entity_name =
+                    "medium-astralite-asteroid"
+            elseif size == "huge" then 
+                effect.entity_name =
+                    "big-astralite-asteroid"
+            end
+        end
+    end
+    data:extend({asteroid})
+end

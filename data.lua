@@ -1,0 +1,6 @@
+require("prototypes.particle.particles")
+require("prototypes.entity.explosions")
+require("prototypes.entity.smoke")
+require("prototypes.items")
+require("prototypes.entity.asteroids")
+require("data-updates")

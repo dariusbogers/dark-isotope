@@ -1,0 +1,15 @@
+{
+    "name": "dark-isotope",
+    "version": "0.1.0",
+    "title": "Dark Isotope",
+    "author": "dazdft",
+    "description": "Advanced isotopic fuels based on exotic materials recovered from space.",
+    "factorio_version": "2.0",
+    "dependencies": [
+        "base >= 2.0.0",
+        "space-age >= 2.0.0",
+        "(?) Cerys-Moon-of-Fulgora",
+        "(?) planet-muluna",
+        "(?) maraxsis"
+    ]
+}
