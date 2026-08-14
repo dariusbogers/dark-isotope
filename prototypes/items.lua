@@ -15,7 +15,20 @@ local astralite_item = {
     -- random_tint_color = item_tints.iron_rust
 }
 
-data:extend({astralite_item})
+local astralite_crystal = {
+    type = "item",
+    name = "crystallized-astralite",
+    icon = "__dark-isotope__/graphics/icons/astralite-crystal.png",
+    subgroup = "intermediate-product",
+    order = "a[astralite]-e[crystallized-astralite]",
+    inventory_move_sound = space_age_item_sounds.rock_inventory_move,
+    pick_sound = space_age_item_sounds.rock_inventory_pickup,
+    drop_sound = space_age_item_sounds.rock_inventory_move,
+    stack_size = 50,
+    weight = 4
+}
+
+data:extend({astralite_item, astralite_crystal})
 
 
 -- local item = table.deepcopy(
