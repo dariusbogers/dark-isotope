@@ -1,4 +1,6 @@
 local space_age_item_sounds = require("__space-age__.prototypes.item_sounds")
+local item_sounds = require("__base__.prototypes.item_sounds")
+
 -- local item_tints = require("__base__.prototypes.item-tints")
 
 local astralite_item = {
@@ -24,11 +26,24 @@ local astralite_crystal = {
     inventory_move_sound = space_age_item_sounds.rock_inventory_move,
     pick_sound = space_age_item_sounds.rock_inventory_pickup,
     drop_sound = space_age_item_sounds.rock_inventory_move,
-    stack_size = 50,
+    stack_size = 100,
     weight = 4
 }
 
-data:extend({astralite_item, astralite_crystal})
+local isotope_347 = {
+    type = "item",
+    name = "isotope-347",
+    icon = "__dark-isotope__/graphics/icons/isotope-347.png",
+    subgroup = "intermediate-product",
+    order = "a[astralite]-e[isotope-347]",
+    inventory_move_sound = item_sounds.nuclear_inventory_move,
+    pick_sound = item_sounds.nuclear_inventory_pickup,
+    drop_sound = item_sounds.nuclear_inventory_move,
+    stack_size = 100,
+    weight = 50*kg
+}
+
+data:extend({astralite_item, astralite_crystal, isotope_347})
 
 
 -- local item = table.deepcopy(

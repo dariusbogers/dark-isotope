@@ -17,10 +17,10 @@ local astralite_slurry_recipe = {
     },
     
     crafting_machine_tint = {
-      primary = {r = 0.40, g = 0.10, b = 0.60, a = 0.50}, -- #e0190080
-      secondary = {r = 0.55, g = 0.20, b = 0.70, a = 0.50}, -- #edc39a80
-      tertiary = {r = 0.30, g = 0.05, b = 0.45, a = 0.50}, -- #dea58a80
-      quaternary = {r = 0.18, g = 0.02, b = 0.28, a = 0.50}, -- #a02c0080
+      primary = {r = 0.40, g = 0.10, b = 0.60, a = 0.50},
+      secondary = {r = 0.55, g = 0.20, b = 0.70, a = 0.50},
+      tertiary = {r = 0.30, g = 0.05, b = 0.45, a = 0.50},
+      quaternary = {r = 0.18, g = 0.02, b = 0.28, a = 0.50},
     },
 
     energy_required = 20
@@ -44,10 +44,10 @@ local purified_astralite_recipe = {
     },
     
     crafting_machine_tint = {
-      primary = {r = 0.65, g = 0.25, b = 0.95, a = 0.50}, -- #e0190080
-      secondary = {r = 0.80, g = 0.45, b = 1.00, a = 0.50}, -- #edc39a80
-      tertiary = {r = 0.50, g = 0.12, b = 0.80, a = 0.50}, -- #dea58a80
-      quaternary = {r = 0.32, g = 0.05, b = 0.55, a = 0.50}, -- #a02c0080
+      primary = {r = 0.65, g = 0.25, b = 0.95, a = 0.50},
+      secondary = {r = 0.80, g = 0.45, b = 1.00, a = 0.50},
+      tertiary = {r = 0.50, g = 0.12, b = 0.80, a = 0.50},
+      quaternary = {r = 0.32, g = 0.05, b = 0.55, a = 0.50},
     },
 
     energy_required = 20
@@ -63,10 +63,10 @@ local astralite_crystallization_recipe = {
     icon = "__dark-isotope__/graphics/icons/astralite-crystal.png",
 
     crafting_machine_tint = {
-      primary = {r = 0.75, g = 0.35, b = 1.00, a = 0.50}, -- #e0190080
-      secondary = {r = 0.90, g = 0.60, b = 1.00, a = 0.50}, -- #edc39a80
-      tertiary = {r = 0.60, g = 0.20, b = 0.90, a = 0.50}, -- #dea58a80
-      quaternary = {r = 0.40, g = 0.08, b = 0.65, a = 0.50}, -- #a02c0080
+      primary = {r = 0.75, g = 0.35, b = 1.00, a = 0.50},
+      secondary = {r = 0.90, g = 0.60, b = 1.00, a = 0.50},
+      tertiary = {r = 0.60, g = 0.20, b = 0.90, a = 0.50},
+      quaternary = {r = 0.40, g = 0.08, b = 0.65, a = 0.50},
     },
 
     ingredients = {
@@ -82,4 +82,32 @@ local astralite_crystallization_recipe = {
     energy_required = 30
 }
 
-data:extend({astralite_slurry_recipe, purified_astralite_recipe, astralite_crystallization_recipe})
+local isotope_347_recipe = {
+    type = "recipe",
+    name = "isotope-347",
+    category = "centrifuging",
+    subgroup = "intermediate-product",
+    order = "z[astralite]-d[isotope-347]",
+    enabled = true,
+
+    crafting_machine_tint = {
+      primary = {r = 0.90, g = 0.235, b = 1.0, a = 1.0},
+      secondary = {r = 0.282, g = 0.071, b = 0.408, a = 1.0},
+      tertiary = {r = 0.290, g = 0.086, b = 0.341, a = 1.0},
+      quaternary = {r = 0.161, g = 0.020, b = 0.196, a = 1.0},
+    },
+
+    ingredients = {
+        {type = "item", name = "crystallized-astralite", amount = 5},
+        {type = "item", name = "uranium-235", amount = 1},
+        {type = "item", name = "uranium-238", amount = 5}
+    },
+
+    results = {
+        {type = "item", name = "isotope-347", amount = 2}
+    },
+
+    energy_required = 60
+}
+
+data:extend({astralite_slurry_recipe, purified_astralite_recipe, astralite_crystallization_recipe, isotope_347_recipe})
