@@ -158,14 +158,20 @@ local isotopic_generator_recipe = {
     enabled = false,
 
     ingredients = {
-        {type = "item" , name = "steel-plane", amount = 200},
+        {type = "item" , name = "steel-plate", amount = 200},
         {type = "item" , name = "concrete", amount = 500},
         {type = "item" , name = "advanced-circuit", amount = 100},
         {type = "item" , name = "processing-unit", amount = 100},
         {type = "item" , name = "low-density-structure", amount = 100},
         {type = "item" , name = "heat-exchanger", amount = 40},
-        {type = "item" , name = "crystallized-astralite", amount = 0}
-    }
+        {type = "item" , name = "crystallized-astralite", amount = 20}
+    },
+
+    results = {
+        {type = "item", name = "isotopic-generator", amount = 1}
+    },
+
+    energy_required = 30
 }
 
 data:extend({
@@ -174,5 +180,6 @@ data:extend({
     astralite_crystallization_recipe,
     isotope_347_recipe,
     isotope_347_fuel,
-    iso_347_fuel_cell
+    iso_347_fuel_cell,
+    isotopic_generator_recipe
 })
