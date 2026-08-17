@@ -75,7 +75,7 @@ local astralite_crystallization_recipe = {
     },
 
     results = {
-        {type = "item", name = "crystallized-astralite", amount = 5},
+        {type = "item", name = "crystallized-astralite", amount = 10},
         {type = "item", name = "sulfur", amount = 1},
     },
 
@@ -110,4 +110,48 @@ local isotope_347_recipe = {
     energy_required = 60
 }
 
-data:extend({astralite_slurry_recipe, purified_astralite_recipe, astralite_crystallization_recipe, isotope_347_recipe})
+
+local isotope_347_fuel = {
+    type = "recipe",
+    name = "isotope-347-fuel",
+
+    category = "chemistry",
+
+    ingredients = {
+        {type = "item", name = "isotope-347", amount = 10},
+        {type = "fluid", name = "heavy-oil", amount = 50}
+    },
+
+    results = {
+        {type = "fluid", name = "isotope-347-fuel", amount = 500}
+    },
+
+    energy_required = 5
+}
+
+local iso_347_fuel_cell = {
+    type = "recipe",
+    name = "347-fuel-cell",
+
+    category = "crafting-with-fluid",
+
+    ingredients = {
+        {type = "fluid", name = "isotope-347-fuel", amount = 50},
+        {type = "item", name = "low-density-structure", amount = 1}
+    },
+
+    results = {
+        {type = "item", name = "347-fuel-cell", amount = 10}
+    },
+
+    energy_required = 10
+}
+
+data:extend({
+    astralite_slurry_recipe,
+    purified_astralite_recipe,
+    astralite_crystallization_recipe,
+    isotope_347_recipe,
+    isotope_347_fuel,
+    iso_347_fuel_cell
+})

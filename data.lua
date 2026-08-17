@@ -1,6 +1,8 @@
+require("prototypes.categories.fuel-categories")
 require("prototypes.particle.particles")
 require("prototypes.entity.explosions")
 require("prototypes.entity.smoke")
+require("prototypes.entity.generator")
 require("prototypes.items")
 require("prototypes.fluids")
 require("prototypes.entity.asteroids")

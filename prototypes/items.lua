@@ -43,7 +43,41 @@ local isotope_347 = {
     weight = 50*kg
 }
 
-data:extend({astralite_item, astralite_crystal, isotope_347})
+local iso_347_fuel_cell = {
+    type = "item",
+    name = "347-fuel-cell",
+    icon = "__dark-isotope__/graphics/icons/347-fuel-cell.png",
+    subgroup = "intermediate-product",
+    order = "a[astralite]-e[347-fuel-cell]",
+    inventory_move_sound = item_sounds.nuclear_inventory_move,
+    pick_sound = item_sounds.nuclear_inventory_pickup,
+    drop_sound = item_sounds.nuclear_inventory_move,
+    stack_size = 20,
+    weight = 50*kg,
+
+    fuel_category = "isotope-fuel",
+    fuel_value = "24GJ",
+    fuel_emission_multiplier = 2
+}
+
+local generator_item = {
+    type = "item",
+    name = "isotopic-generator",
+    icon = "__dark-isotope__/graphics/icons/isotopic-generator.png",
+
+    subgroup = "production-machine",
+    order = "z[isotopic-generator]",
+    place_result = "isotopic-generator",
+    stack_size = 10
+}
+
+data:extend({
+    astralite_item,
+    astralite_crystal,
+    isotope_347,
+    iso_347_fuel_cell,
+    generator_item
+})
 
 
 -- local item = table.deepcopy(
