@@ -2,7 +2,7 @@ local astralite_slurry_recipe = {
     type = "recipe",
     name = "astralite-slurry",
     category = "chemistry",
-    enabled = true,
+    enabled = false,
     subgroup = "intermediate-product",
     order = "a[astralite]-e[slurry]",
 
@@ -30,7 +30,7 @@ local purified_astralite_recipe = {
     type = "recipe",
     name = "purified-astralite",
     category = "chemistry",
-    enabled = true,
+    enabled = false,
     subgroup = "intermediate-product",
     order = "a[astralite]-e[purified]",
 
@@ -59,7 +59,7 @@ local astralite_crystallization_recipe = {
     category = "chemistry",
     subgroup = "intermediate-product",
     order = "z[astralite]-c[crystallized]",
-    enabled = true,
+    enabled = false,
     icon = "__dark-isotope__/graphics/icons/astralite-crystal.png",
 
     crafting_machine_tint = {
@@ -88,7 +88,7 @@ local isotope_347_recipe = {
     category = "centrifuging",
     subgroup = "intermediate-product",
     order = "z[astralite]-d[isotope-347]",
-    enabled = true,
+    enabled = false,
 
     crafting_machine_tint = {
       primary = {r = 0.90, g = 0.235, b = 1.0, a = 1.0},
@@ -114,6 +114,7 @@ local isotope_347_recipe = {
 local isotope_347_fuel = {
     type = "recipe",
     name = "isotope-347-fuel",
+    enabled = false,
 
     category = "chemistry",
 
@@ -132,6 +133,7 @@ local isotope_347_fuel = {
 local iso_347_fuel_cell = {
     type = "recipe",
     name = "347-fuel-cell",
+    enabled = false,
 
     category = "crafting-with-fluid",
 
@@ -145,6 +147,25 @@ local iso_347_fuel_cell = {
     },
 
     energy_required = 10
+}
+
+local isotopic_generator_recipe = {
+    type = "recipe",
+    name = "isotopic-generator",
+
+    category = "crafting",
+
+    enabled = false,
+
+    ingredients = {
+        {type = "item" , name = "steel-plane", amount = 200},
+        {type = "item" , name = "concrete", amount = 500},
+        {type = "item" , name = "advanced-circuit", amount = 100},
+        {type = "item" , name = "processing-unit", amount = 100},
+        {type = "item" , name = "low-density-structure", amount = 100},
+        {type = "item" , name = "heat-exchanger", amount = 40},
+        {type = "item" , name = "crystallized-astralite", amount = 0}
+    }
 }
 
 data:extend({

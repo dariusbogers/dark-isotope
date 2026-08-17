@@ -68,7 +68,8 @@ local generator_item = {
     subgroup = "production-machine",
     order = "z[isotopic-generator]",
     place_result = "isotopic-generator",
-    stack_size = 10
+    stack_size = 10,
+    weight = 1000 * kg
 }
 
 data:extend({
