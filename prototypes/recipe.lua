@@ -8,7 +8,7 @@ local astralite_slurry_recipe = {
 
     ingredients = {
         {type = "item", name = "astralite-asteroid-chunk", amount = 5},
-        {type = "item", name = "iron-ore", amount = 50},
+        {type = "item", name = "iron-ore", amount = 25},
         {type = "fluid", name = "sulfuric-acid", amount = 150}
     },
 
@@ -98,13 +98,13 @@ local isotope_347_recipe = {
     },
 
     ingredients = {
-        {type = "item", name = "crystallized-astralite", amount = 5},
+        {type = "item", name = "crystallized-astralite", amount = 10},
         {type = "item", name = "uranium-235", amount = 1},
-        {type = "item", name = "uranium-238", amount = 5}
+        {type = "item", name = "uranium-238", amount = 10}
     },
 
     results = {
-        {type = "item", name = "isotope-347", amount = 2}
+        {type = "item", name = "isotope-347", amount = 5}
     },
 
     energy_required = 60
@@ -124,7 +124,7 @@ local isotope_347_fuel = {
     },
 
     results = {
-        {type = "fluid", name = "isotope-347-fuel", amount = 500}
+        {type = "fluid", name = "isotope-347-fuel", amount = 100}
     },
 
     energy_required = 5
@@ -138,8 +138,8 @@ local iso_347_fuel_cell = {
     category = "crafting-with-fluid",
 
     ingredients = {
-        {type = "fluid", name = "isotope-347-fuel", amount = 50},
-        {type = "item", name = "low-density-structure", amount = 1}
+        {type = "fluid", name = "isotope-347-fuel", amount = 100},
+        {type = "item", name = "low-density-structure", amount = 10}
     },
 
     results = {

@@ -43,7 +43,7 @@ local isotope_347_processing = {
     },
 
     unit = {
-        count = 1000,
+        count = 1500,
         ingredients = {
             {"automation-science-pack", 1},
             {"logistic-science-pack", 1},
