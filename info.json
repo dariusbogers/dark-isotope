@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "title": "Dark Isotope",
     "author": "dazdft",
-    "description": "Advanced isotopic fuels based on exotic materials recovered from space.",
+    "description": "Discover Astralite, an exotic material recovered from space, use its unique nuclear properties to create Isotope-347: an extraordinarily energy-dense isotope capable of direct energy conversion. Build massive isotopic generators and leave convetional steam-based power behind",
     "factorio_version": "2.0",
     "dependencies": [
         "base >= 2.0.0",
